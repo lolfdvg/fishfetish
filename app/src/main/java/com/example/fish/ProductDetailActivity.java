@@ -1,0 +1,79 @@
+package com.example.fish;
+
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+import com.bumptech.glide.Glide;
+
+public class ProductDetailActivity extends AppCompatActivity {
+    private Product product;
+    private ImageView ivProduct;
+    private TextView tvName, tvDescription, tvPrice, tvCountry, tvCutType;
+    private Button btnAddToCart;
+    private EditText etWeight;
+    private TextView tvTotalPrice;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_product_detail);
+
+        product = getIntent().getParcelableExtra("product");
+        initViews();
+        setupProductDetails();
+    }
+
+    private void initViews() {
+        ivProduct = findViewById(R.id.iv_product);
+        tvName = findViewById(R.id.tv_name);
+        tvDescription = findViewById(R.id.tv_description);
+        tvPrice = findViewById(R.id.tv_price);
+        tvCountry = findViewById(R.id.tv_country);
+        tvCutType = findViewById(R.id.tv_cut_type);
+        btnAddToCart = findViewById(R.id.btn_add_to_cart);
+        etWeight = findViewById(R.id.et_weight);
+        tvTotalPrice = findViewById(R.id.tv_total_price);
+    }
+
+    private void setupProductDetails() {
+        tvName.setText(product.getName());
+        tvDescription.setText(product.getDescription());
+        tvPrice.setText(String.format("%.2f ₽/кг", product.getPricePerKg()));
+        tvCountry.setText(product.getCountry());
+        tvCutType.setText(product.getCutType());
+
+        // Загрузка изображения
+        Glide.with(this)
+                .load(product.getImageUrl())
+                .into(ivProduct);
+
+        // Расчет цены при изменении веса
+        etWeight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                calculateTotalPrice();
+            }
+        });
+    }
+
+    private void calculateTotalPrice() {
+        try {
+            double weight = Double.parseDouble(etWeight.getText().toString());
+            double total = weight * product.getPricePerKg();
+            tvTotalPrice.setText(String.format("Итого: %.2f ₽", total));
+        } catch (NumberFormatException e) {
+            tvTotalPrice.setText("Итого: 0.00 ₽");
+        }
+    }
+}

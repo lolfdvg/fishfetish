@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Базовые цвета (уже существуют) -->
+    <color name="primary_color">#2196F3</color>
+    <color name="primary_dark_color">#1976D2</color>
+    <color name="primary_light">#BBDEFB</color>
+    <color name="accent_color">#FF4081</color>
+
+    <!-- Текст (уже существуют) -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_hint">#BDBDBD</color>
+
+    <!-- Фон и поверхности (уже существуют) -->
+    <color name="background">#FFFFFF</color>
+    <color name="surface">#FFFFFF</color>
+
+    <!-- Дополнительные цвета для UI (уже существуют) -->
+    <color name="price_color">#4CAF50</color>
+    <color name="error_color">#F44336</color>
+    <color name="success_color">#4CAF50</color>
+    <color name="warning_color">#FF9800</color>
+    <color name="divider">#E0E0E0</color>
+    <color name="card_background">#FFFFFF</color>
+
+    <!-- Темные цвета (уже существуют) -->
+    <color name="dark_background">#121212</color>
+    <color name="dark_surface">#1E1E1E</color>
+    <color name="dark_text_primary">#FFFFFF</color>
+    <color name="dark_text_secondary">#B0B0B0</color>
+
+    <!-- Новые цвета для Material3 Theme.FishApp -->
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="colorOnSecondary">#000000</color>
+
+    <!-- Недостающие цвета -->
+    <color name="white">#FFFFFF</color>
+    <color name="colorOnPrimary">#FFFFFF</color> <!-- если нужен кастомный -->
+
+    <!-- Для темной темы -->
+    <color name="primary_dark">#1976D2</color> <!-- совпадает с primary_dark_color -->
+</resources>

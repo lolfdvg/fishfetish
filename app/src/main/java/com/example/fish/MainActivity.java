@@ -2,11 +2,9 @@ package com.example.fish;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("AppSettings", MODE_PRIVATE);
         boolean isDarkMode = prefs.getBoolean("DarkMode", false);
+
         if (isDarkMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
@@ -26,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_main);
-
         setupNavigation();
 
         // Стартовый фрагмент
@@ -35,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.fragment_container, new CatalogFragment())
                     .commit();
         }
-    }
+    } // Закрывающая скобка для onCreate()
 
     private void setupNavigation() {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -44,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
             int id = item.getItemId();
+
             if (id == R.id.nav_catalog) {
                 selectedFragment = new CatalogFragment();
             } else if (id == R.id.nav_cart) {
@@ -60,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
                         .commit();
                 return true;
             }
+
             return false;
         });
-    }
-}
+    } // Закрывающая скобка для setupNavigation()
+
+} // Закрывающая скобка для класса MainActivity

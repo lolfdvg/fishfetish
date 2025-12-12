@@ -71,18 +71,28 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         Glide.with(holder.itemView.getContext())
                 .load(product.getImageUrl())
-                .placeholder(R.drawable.placeholder_fish)
+                .placeholder(R.drawable.placeholderfish)
                 .into(holder.ivProduct);
 
-        holder.itemView.setOnClickListener(v -> {
+        // клик по кнопке
+        holder.btnAddToCart.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onProductClick(product);
             }
         });
 
-        holder.btnAddToCart.setOnClickListener(v -> {
-            if (addToCartListener != null) {
-                addToCartListener.onAddToCartClick(product);
+        // === КНОПКА ИЗБРАННОГО ===
+        boolean isFavorite = FavoritesManager.isFavorite(holder.itemView.getContext(), product);
+        holder.btnFavorite.setText(isFavorite ? "Удалить из избранного" : "Добавить в избранное");
+
+        holder.btnFavorite.setOnClickListener(v -> {
+            boolean nowFavorite = FavoritesManager.isFavorite(v.getContext(), product);
+            if (nowFavorite) {
+                FavoritesManager.removeFromFavorites(v.getContext(), product);
+                holder.btnFavorite.setText("Добавить в избранное");
+            } else {
+                FavoritesManager.addToFavorites(v.getContext(), product);
+                holder.btnFavorite.setText("Удалить из избранного");
             }
         });
     }
@@ -97,6 +107,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         ImageView ivProduct;
         TextView tvName, tvPrice, tvCategory, tvStatus;
         Button btnAddToCart;
+        Button btnFavorite; // новая кнопка
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -106,6 +117,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             tvCategory = itemView.findViewById(R.id.tv_category);
             tvStatus = itemView.findViewById(R.id.tv_status);
             btnAddToCart = itemView.findViewById(R.id.btn_add_to_cart);
+            btnFavorite = itemView.findViewById(R.id.btnFavorite); // инициализация избранного
         }
     }
 }

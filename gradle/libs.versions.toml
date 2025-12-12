@@ -8,8 +8,6 @@ appcompat = "1.7.1"
 material = "1.13.0"
 activity = "1.12.1"
 constraintlayout = "2.2.1"
-
-# Дополнительные версии
 recyclerview = "1.4.0"
 cardview = "1.0.0"
 lifecycle = "2.10.0"
@@ -17,15 +15,12 @@ retrofit = "3.0.0"
 okhttp = "5.3.2"
 glide = "5.0.5"
 room = "2.8.4"
-
-# Новые версии из build.gradle.kts
-vectordrawable = "1.2.0"
-json = "20250517"
-supabase = "3.2.6"
-postgresql = "42.7.8"
+vectordrawable = "1.1.0"
+json = "20231013"
+gson = "2.10.1"
+supabase = "1.2.0"
 
 [libraries]
-# Существующие библиотеки
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -33,37 +28,23 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-
-# Kotlin
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
-
-# Дополнительные библиотеки
 recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
-
-# Lifecycle
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycle" }
 lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata", version.ref = "lifecycle" }
-
-# Сеть
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
-
-# Изображения
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
-
-# Room
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
-
-# Новые библиотеки из build.gradle.kts
 vectordrawable = { group = "androidx.vectordrawable", name = "vectordrawable", version.ref = "vectordrawable" }
 json = { group = "org.json", name = "json", version.ref = "json" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 supabase-postgrest = { group = "io.github.jan-tennert.supabase", name = "postgrest-kt", version.ref = "supabase" }
 supabase-gotrue = { group = "io.github.jan-tennert.supabase", name = "gotrue-kt", version.ref = "supabase" }
-postgresql = { group = "org.postgresql", name = "postgresql", version.ref = "postgresql" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -13,9 +13,7 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-
         vectorDrawables.useSupportLibrary = true
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -44,16 +42,18 @@ android {
 }
 
 dependencies {
+    // Основные библиотеки
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
 
     // Векторные изображения
-    implementation("androidx.vectordrawable:vectordrawable:1.1.0")
+    implementation(libs.vectordrawable)
 
     // JSON
-    implementation("org.json:json:20231013")
+    implementation(libs.json)
+    implementation(libs.gson)
 
     // Kotlin
     implementation(libs.kotlin.stdlib)
@@ -80,9 +80,10 @@ dependencies {
     annotationProcessor(libs.room.compiler)
 
     // Supabase
-    implementation("io.github.jan-tennert.supabase:postgrest-kt:1.2.0")
-    implementation("io.github.jan-tennert.supabase:gotrue-kt:1.2.0")
+    implementation(libs.supabase.postgrest)
+    implementation(libs.supabase.gotrue)
 
+    // Тесты
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

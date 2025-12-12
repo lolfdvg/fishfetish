@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 
@@ -26,6 +27,28 @@ public class ProductDetailActivity extends AppCompatActivity {
         product = getIntent().getParcelableExtra("product");
         initViews();
         setupProductDetails();
+
+        // Обработчик кнопки "Добавить в корзину"
+        btnAddToCart.setOnClickListener(v -> {
+            try {
+                double weight = Double.parseDouble(etWeight.getText().toString());
+                if (weight > 0) {
+                    CartItem cartItem = new CartItem(product, weight, "");
+                    CartManager.addToCart(ProductDetailActivity.this, cartItem);
+                    Toast.makeText(ProductDetailActivity.this,
+                            "Добавлено в корзину: " + product.getName(),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ProductDetailActivity.this,
+                            "Введите вес больше 0",
+                            Toast.LENGTH_SHORT).show();
+                }
+            } catch (NumberFormatException e) {
+                Toast.makeText(ProductDetailActivity.this,
+                        "Введите корректный вес",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initViews() {
@@ -62,18 +85,14 @@ public class ProductDetailActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                calculateTotalPrice();
+                try {
+                    double weight = Double.parseDouble(s.toString());
+                    double totalPrice = weight * product.getPricePerKg();
+                    tvTotalPrice.setText(String.format("Итого: %.2f ₽", totalPrice));
+                } catch (NumberFormatException e) {
+                    tvTotalPrice.setText("Итого: 0.00 ₽");
+                }
             }
         });
-    }
-
-    private void calculateTotalPrice() {
-        try {
-            double weight = Double.parseDouble(etWeight.getText().toString());
-            double total = weight * product.getPricePerKg();
-            tvTotalPrice.setText(String.format("Итого: %.2f ₽", total));
-        } catch (NumberFormatException e) {
-            tvTotalPrice.setText("Итого: 0.00 ₽");
-        }
     }
 }

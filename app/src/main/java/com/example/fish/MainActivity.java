@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setItemIconTintList(null);
 
+        // обработка пунктов нижнего меню, включая Избранное
         bottomNavigationView.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
             int id = item.getItemId();
@@ -58,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 selectedFragment = new OrdersFragment();
             } else if (id == R.id.nav_profile) {
                 selectedFragment = new ProfileFragment();
+            } else if (id == R.id.nav_favorites) {
+                selectedFragment = new FavoritesFragment();
             }
 
             if (selectedFragment != null) {
@@ -88,11 +91,9 @@ public class MainActivity extends AppCompatActivity {
     private void toggleTheme() {
         boolean currentDarkMode = prefs.getBoolean("DarkMode", false);
         boolean newDarkMode = !currentDarkMode;
-
         prefs.edit()
                 .putBoolean("DarkMode", newDarkMode)
                 .apply();
-
         recreate();
     }
 }

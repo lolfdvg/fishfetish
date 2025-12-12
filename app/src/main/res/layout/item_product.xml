@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/placeholder_fish" />
+            android:src="@drawable/placeholderfish" />
 
         <TextView
             android:id="@+id/tv_name"
@@ -52,12 +52,22 @@
             android:layout_height="wrap_content"
             android:textSize="12sp" />
 
+
         <Button
             android:id="@+id/btn_add_to_cart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="В корзину"
+            android:backgroundTint="@color/primary_color" />
+
+
+        <Button
+            android:id="@+id/btnFavorite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Добавить в избранное"
             android:backgroundTint="@color/primary_color" />
 
     </LinearLayout>

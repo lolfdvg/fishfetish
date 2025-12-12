@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                         .commit();
                 return true;
             }
+
             return false;
         });
     }
@@ -95,5 +96,23 @@ public class MainActivity extends AppCompatActivity {
                 .putBoolean("DarkMode", newDarkMode)
                 .apply();
         recreate();
+    }
+
+    // Методы, которые вызываются из ProfileFragment
+
+    public void openOrdersFromProfile() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new OrdersFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void openFavoritesFromProfile() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new FavoritesFragment())
+                .addToBackStack(null)
+                .commit();
     }
 }

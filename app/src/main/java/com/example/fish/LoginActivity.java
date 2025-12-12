@@ -49,19 +49,21 @@ public class LoginActivity extends AppCompatActivity {
         AuthService.login(email, password, new AuthService.AuthCallback<User>() {
             @Override
             public void onSuccess(User user) {
-                SharedPreferences prefs = getSharedPreferences("AppSettings", MODE_PRIVATE);
-                prefs.edit()
-                        .putString("userToken", user.getToken())
-                        .putString("userId", user.getId())
-                        .apply();
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                finish();
+                runOnUiThread(() -> {
+                    SharedPreferences prefs = getSharedPreferences("AppSettings", MODE_PRIVATE);
+                    prefs.edit()
+                            .putString("userToken", user.getToken())
+                            .putString("userId", user.getId())
+                            .apply();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                });
             }
 
             @Override
             public void onError(String error) {
                 runOnUiThread(() ->
-                        Toast.makeText(LoginActivity.this, "Ошибка: " + error, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(LoginActivity.this, "Ошибка: " + error, Toast.LENGTH_LONG).show()
                 );
             }
         });
@@ -69,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void forgotPassword() {
         String email = etEmail.getText().toString().trim();
-
         if (email.isEmpty()) {
             Toast.makeText(this, "Введите email", Toast.LENGTH_SHORT).show();
             return;
@@ -79,14 +80,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String result) {
                 runOnUiThread(() ->
-                        Toast.makeText(LoginActivity.this, "Ссылка для сброса пароля отправлена", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(LoginActivity.this,
+                                "Ссылка для сброса пароля отправлена на email", Toast.LENGTH_LONG).show()
                 );
             }
 
             @Override
             public void onError(String error) {
                 runOnUiThread(() ->
-                        Toast.makeText(LoginActivity.this, "Ошибка: " + error, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(LoginActivity.this, "Ошибка: " + error, Toast.LENGTH_LONG).show()
                 );
             }
         });

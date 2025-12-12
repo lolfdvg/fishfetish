@@ -40,11 +40,18 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+        // Проверка длины пароля (Supabase требует минимум 6 символов)
+        if (password.length() < 6) {
+            Toast.makeText(this, "Пароль должен содержать минимум 6 символов", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         AuthService.register(email, password, new AuthService.AuthCallback<User>() {
             @Override
             public void onSuccess(User user) {
                 runOnUiThread(() -> {
-                    Toast.makeText(RegisterActivity.this, "Регистрация успешна", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this,
+                            "Регистрация успешна! Проверьте email для подтверждения", Toast.LENGTH_LONG).show();
                     finish();
                 });
             }
@@ -52,7 +59,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onError(String error) {
                 runOnUiThread(() ->
-                        Toast.makeText(RegisterActivity.this, "Ошибка: " + error, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(RegisterActivity.this,
+                                "Ошибка: " + error, Toast.LENGTH_LONG).show()
                 );
             }
         });

@@ -38,6 +38,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         this.addToCartListener = listener;
     }
 
+    public void setProducts(List<Product> products) {
+        this.products = products;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public ProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -88,6 +93,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+
         ImageView ivProduct;
         TextView tvName, tvPrice, tvCategory, tvStatus;
         Button btnAddToCart;

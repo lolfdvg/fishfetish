@@ -1,60 +1,45 @@
 package com.example.fish;
 
-import java.util.List;
-
 public class User {
     private String id;
     private String email;
-    private String name;
-    private String phone;
     private String token;
-    private List<String> favoriteFishTypes;
+    private String refreshToken;
+    private long expiresAt;
+    private String createdAt;
+    private String phone;
 
-    public String getId() {
-        return id;
-    }
+    // Геттеры и сеттеры
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getToken() { return token; }
+    public void setToken(String token) { this.token = token; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String getRefreshToken() { return refreshToken; }
+    public void setRefreshToken(String refreshToken) { this.refreshToken = refreshToken; }
 
-    public String getName() {
-        return name;
-    }
+    public long getExpiresAt() { return expiresAt; }
+    public void setExpiresAt(long expiresAt) { this.expiresAt = expiresAt; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getCreatedAt() { return createdAt; }
+    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
 
-    public String getPhone() {
-        return phone;
-    }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public List<String> getFavoriteFishTypes() {
-        return favoriteFishTypes;
-    }
-
-    public void setFavoriteFishTypes(List<String> favoriteFishTypes) {
-        this.favoriteFishTypes = favoriteFishTypes;
+    // Проверка валидности токена
+    public boolean isTokenValid() {
+        if (token == null || token.isEmpty()) {
+            return false;
+        }
+        if (expiresAt > 0) {
+            long currentTime = System.currentTimeMillis() / 1000;
+            return expiresAt > currentTime;
+        }
+        return true;
     }
 }
